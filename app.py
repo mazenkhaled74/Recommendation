@@ -24,4 +24,4 @@ def recommend():
 
 if __name__ == '__main__':
     print("Service is running")
-    app.run(debug=False)
+    app.run(host="0.0.0.0", port=5000)
