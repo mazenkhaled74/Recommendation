@@ -23,4 +23,5 @@ def recommend():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    print("Service is running")
+    app.run(debug=False)
