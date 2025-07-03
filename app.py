@@ -34,16 +34,17 @@ label_encoders = joblib.load('label_encoders.pkl')
 @app.route('/recommend/coaches', methods=['POST'])
 def recommendCoaches():
     data = request.json
-
     required_fields = ['age', 'height', 'weight', 'body_fat', 'body_muscle', 'goals']
     if not all(field in data for field in required_fields):
         return jsonify({'error': 'Missing one or more required fields.'}), 400
-
     try:
-        top_experiences = recommender.recommend_coaches(data, all_coaches)
+        top_n = data.get('top_n', 1)
+        top_experiences = recommender.recommend_coaches(data, all_coaches, top_n=top_n)
         return jsonify({'recommended_experiences': top_experiences})
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        import traceback
+        tb = traceback.format_exc()
+        return jsonify({'error': str(e), 'traceback': tb}), 500
 
 @app.route('/recommend/exercise-diet', methods=['POST'])
 def recommendPlans():
