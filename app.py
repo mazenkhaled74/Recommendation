@@ -6,7 +6,7 @@ import joblib
 app = Flask(__name__)
 
 # Coaches Recommendation model startup
-recommender = CoachRecommender(model_path='recommender_model.pkl')
+recommender = CoachRecommender(model_path='recommender_model_2.pkl')
 
 model_data = joblib.load('coach_recommender.pkl')
 model = model_data['model']
@@ -14,7 +14,7 @@ print("coach_recommender.pkl contains it ?" )
 print(hasattr(model, 'use_label_encoder'))  # Should print False
 print("----------------------------------------------")
 
-model_data = joblib.load('recommender_model.pkl')
+model_data = joblib.load('recommender_model_2.pkl')
 model = model_data['model']
 print("recommender_model.pkl contains it ?" )
 print(hasattr(model, 'use_label_encoder'))  # Should print False
