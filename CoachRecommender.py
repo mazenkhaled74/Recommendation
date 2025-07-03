@@ -3,7 +3,7 @@ import joblib
 import xgboost as xgb
 
 class CoachRecommender:
-    def __init__(self, model_path='gym_model.pkl'):
+    def __init__(self, model_path='coach_recommender_model1.pkl'):
         self.model = None
         self.feature_columns = []
         self.skill_list = []
