@@ -6,7 +6,19 @@ import joblib
 app = Flask(__name__)
 
 # Coaches Recommendation model startup
-recommender = CoachRecommender(model_path='coach_recommender.pkl')
+recommender = CoachRecommender(model_path='recommender_model.pkl')
+
+model_data = joblib.load('coach_recommender.pkl')
+model = model_data['model']
+print("coach_recommender.pkl contains it ?" )
+print(hasattr(model, 'use_label_encoder'))  # Should print False
+print("----------------------------------------------")
+
+model_data = joblib.load('recommender_model.pkl')
+model = model_data['model']
+print("recommender_model.pkl contains it ?" )
+print(hasattr(model, 'use_label_encoder'))  # Should print False
+print("----------------------------------------------")
 
 # Load your coaches dataset once at startup
 all_coaches = pd.read_csv("coach_suitability.csv")[['coach_id', 'coach_name', 'coach_rating', 'coach_experiences']].drop_duplicates().reset_index(drop=True)
