@@ -33,7 +33,7 @@ def recommendCoaches():
         top_experiences = recommender.recommend_coaches(data, all_coaches, top_n=top_n)
         formatted = [
             " & ".join(word.capitalize() for word in exp.strip().split("&"))
-            for exp in recommendations
+            for exp in top_experiences
         ]
 
         return jsonify({"recommended_experiences": formatted})
