@@ -33,8 +33,10 @@ def recommendCoaches():
         top_experiences = recommender.recommend_coaches(data, all_coaches, top_n=top_n)
         formatted = [
             " & ".join(word.capitalize() for word in exp.strip().split("&"))
-            for exp in top_experiences
+            for exp in recommendations
         ]
+
+        return jsonify({"recommended_experiences": formatted})
     except Exception as e:
         import traceback
         tb = traceback.format_exc()
