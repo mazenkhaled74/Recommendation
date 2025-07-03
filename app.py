@@ -10,15 +10,6 @@ recommender = CoachRecommender(model_path='recommender_model_2.pkl')
 
 model_data = joblib.load('coach_recommender.pkl')
 model = model_data['model']
-print("coach_recommender.pkl contains it ?" )
-print(hasattr(model, 'use_label_encoder'))  # Should print False
-print("----------------------------------------------")
-
-model_data = joblib.load('recommender_model_2.pkl')
-model = model_data['model']
-print("recommender_model.pkl contains it ?" )
-print(hasattr(model, 'use_label_encoder'))  # Should print False
-print("----------------------------------------------")
 
 # Load your coaches dataset once at startup
 all_coaches = pd.read_csv("coach_suitability.csv")[['coach_id', 'coach_name', 'coach_rating', 'coach_experiences']].drop_duplicates().reset_index(drop=True)
@@ -40,7 +31,10 @@ def recommendCoaches():
     try:
         top_n = data.get('top_n', 1)
         top_experiences = recommender.recommend_coaches(data, all_coaches, top_n=top_n)
-        return jsonify({'recommended_experiences': top_experiences})
+        formatted = [
+            " & ".join(word.capitalize() for word in exp.strip().split("&"))
+            for exp in top_experiences
+        ]
     except Exception as e:
         import traceback
         tb = traceback.format_exc()
