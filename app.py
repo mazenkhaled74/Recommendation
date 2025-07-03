@@ -6,7 +6,7 @@ import joblib
 app = Flask(__name__)
 
 # Coaches Recommendation model startup
-recommender = CoachRecommender(model_path='coach_recommender_model.pkl')
+recommender = CoachRecommender(model_path='coach_recommender_model1.pkl')
 
 # Load your coaches dataset once at startup
 all_coaches = pd.read_csv("coach_suitability.csv")[['coach_id', 'coach_name', 'coach_rating', 'coach_experiences']].drop_duplicates().reset_index(drop=True)
